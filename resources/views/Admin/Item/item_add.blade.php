@@ -27,7 +27,7 @@
 					<div class="panel-body">
 					<div class="col-md-12">
 						
-						<form action="{{route('item.store')}}" method="post">
+						  <form method="post" action ="{{route('item.store')}}">
 							{{ csrf_field() }}
 
 								<div class="form-group">

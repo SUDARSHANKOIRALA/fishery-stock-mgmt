@@ -21,7 +21,8 @@ Route::get('/dashboard', 'DashboardController@index');
 
 //admin
 Route::group(['middleware' => ['auth']],function(){
-		
+
+
 });
 
 //login form for admin...
@@ -39,12 +40,14 @@ Route::get('/logout', 'AdminController@logout');
 
 //for items create
 Route::get('/item/create','ItemController@create');
-// item store
-Route::post('/item/store',[
-        'uses'=>'ItemController@store',
-        'as'=>'item.store'
-    ]);
-//view the list of submenus...
+// store items
+
+ Route::post('/item/store',[
+			'uses' =>'ItemController@store',
+ 			'as' =>'item.store'
+	]);
+
+//view the list of items..
 Route::get('/item/view','ItemController@index');
 //to edit item...
 Route::get('/item/{id}/edit','ItemController@edit');
@@ -53,3 +56,13 @@ Route::patch('/item/update/{id}',[
     'uses' => 'ItemController@update',
     'as'  => 'item.update'
 ]);
+
+// For Bills 
+Route::get('/bill/create','BillController@create');	
+//store
+Route::post('/bill/store',[
+	'uses' =>'BillController@store',
+	'as' => 'bill.store'
+]);
+
+

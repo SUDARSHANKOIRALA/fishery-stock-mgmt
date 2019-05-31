@@ -54,8 +54,8 @@ class ItemController extends Controller
 
             $this->validate($request,[
             'item_code' => 'required',
-            'item_name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
+            'item_name' => 'required',
+            'slug' => 'required',
             'unit_price' => 'required',                
             ]);            
 
