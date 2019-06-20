@@ -40,15 +40,25 @@
 								<input class="form-control" name="item_name" placeholder="item name">
 							</div>	
 
-							<div class="form-group">
-								<label>Slug</label>
-								<input class="form-control" name="slug" placeholder="Slug">
-							</div>		
 								
 									<div class="form-group">
 								<label>Unit Price</label>
 								<input class="form-control" name="unit_price" placeholder="item price per kg">
-							</div>														
+							</div>
+
+							<div class="form-group">
+								<label>Status</label>
+								<div class="radio">
+									<label>
+										<input type="radio" name="status" id="optionsRadios1" value="1" checked>Active
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="status" id="optionsRadios2" value="0">Inactive
+									</label>
+								</div>									
+							</div>													
 
 							<button type="submit" class="btn btn-primary">Submit</button>																
 						</form>

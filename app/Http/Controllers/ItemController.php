@@ -55,15 +55,15 @@ class ItemController extends Controller
             $this->validate($request,[
             'item_code' => 'required',
             'item_name' => 'required',
-            'slug' => 'required',
-            'unit_price' => 'required',                
+            'unit_price' => 'required',  
+            'status' => 'required',           
             ]);            
 
             $item = new Item;
             $item->item_code = $request->input('item_code');
             $item->item_name = $request->input('item_name');
-            $item->slug = $request->input('slug');
             $item->unit_price = $request->input('unit_price');
+            $item->status = $request->input('status');
             $item->save();
 
             return redirect('/item/view')->with('success','item added');
@@ -118,15 +118,15 @@ class ItemController extends Controller
             $this->validate($request,[
                 'item_code' => 'required',
                 'item_name' => 'required',
-                'slug'  => 'required',
-                'unit_price'  => 'required'
+                'unit_price'  => 'required',
+                'status' => 'required',
             ]);
 
             $item = Item::find($id);
             $item->item_code = $request->input(['item_code']);
             $item->item_name = $request->input(['item_name']);
-            $item->slug = $request->input(['slug']);
             $item->unit_price = $request->input(['unit_price']);
+            $item->status = $request->input('status');
             $item->save();
 
             return redirect('/item/view')->with('success','item succesfully updated');
@@ -145,5 +145,18 @@ class ItemController extends Controller
     public function destroy($id)
     {
         //
+    }
+      public function toogle_status($id){
+
+        if(Session::has('adminsession')){
+            
+            $item = Item::find($id);
+            $item->status =  1 - $item->status;           
+            $item->save();            
+
+            return redirect('/item/view');
+        }else{
+            return redirect('/admin')->with('flash_msg_err','You must login to access');        
+        }
     }
 }

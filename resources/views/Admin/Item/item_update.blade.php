@@ -42,17 +42,32 @@
 							<div class="form-group">
 								<label>Item Name</label>
 								<input class="form-control" name="item_name" value="{{ $item->item_name }}" placeholder="item code">
-							</div>	
-
-							<div class="form-group">
-								<label>Slug</label>
-								<input class="form-control" name="slug" value="{{ $item->slug }}" placeholder="Slug">
 							</div>		
 								
 							<div class="form-group">
 								<label>Unit Price</label>
 								<input class="form-control" name="unit_price" value="{{ $item->unit_price }}" placeholder="unit price">
-							</div>															
+							</div>		
+
+								<div class="form-group">
+								<label>Status</label>
+								<div class="radio">
+									<label>
+										<input type="radio" name="status" id="optionsRadios1" value="1" 
+										@if($item->status == 1) checked 
+										@endif>
+										Active
+									</label>
+								</div>
+								<div class="radio">
+									<label>
+										<input type="radio" name="status" id="optionsRadios2" value="0"
+										@if($item->status == 0) checked 
+										@endif
+										> Inactive
+									</label>
+								</div>									
+							</div>													
 
 							<button type="submit" class="btn btn-primary">Update</button>																
 						</form>

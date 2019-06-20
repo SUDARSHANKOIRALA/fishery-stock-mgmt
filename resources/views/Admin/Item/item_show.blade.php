@@ -38,8 +38,8 @@
 						        <th data-field="id" >SN</th>
 						        <th data-field="item_code" >Item Code</th>
 						        <th data-field="item_name" >Item Name</th>
-						        <th data-field="slug" >Slug</th>
 						        <th data-field="unit_price" >Unit Price</th>
+						        <th data-field="status">Status</th>
 						        <th data-field="created_at" >Created at</th>
 						        <th data-field="updated_at" >Updated at</th>						        
                                 						         
@@ -52,10 +52,18 @@
 							    	<td >{{ $i++ }}</td>
 							    	<td >{{ $item->item_code }}</td>
 							    	<td >{{ $item->item_name }}</td>
-					    			<td >{{ $item->slug }}</td>
 					    			<td >{{ $item->unit_price }}</td>
 							    	<td >{{ $item->created_at }}</td>
-                                    <td >{{ $item->updated_at }}</td>      
+                                    <td >{{ $item->updated_at }}</td>
+
+                                    @if($item->status == 0)
+							    		  <td > <a href="/item/toogle/{{ $item->id }}">  
+							    		  	<button type="button" class = 'btn btn-danger'>inactive</button> 
+							    		  </a>
+							    		  </td>							    		  
+							    	@else 
+							    	<td ><a href="/item/toogle/{{ $item->id }}"> <button class = 'btn btn-success'>active</button> </td></a>
+							    	  @endif      
                                     
                                     <td >
                                         {{-- <a href="/Item/item_update/{{ $item->id }}"> --}}

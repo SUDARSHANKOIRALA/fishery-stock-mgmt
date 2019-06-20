@@ -56,13 +56,20 @@ Route::patch('/item/update/{id}',[
     'uses' => 'ItemController@update',
     'as'  => 'item.update'
 ]);
+//item togle
+Route::get('/item/toogle/{id}','ItemController@toogle_status');
 
 // For Bills 
 Route::get('/bill/create','BillController@create');	
+
 //store
-Route::post('/bill/store',[
-	'uses' =>'BillController@store',
-	'as' => 'bill.store'
+ Route::post('/bill/store',[
+			'uses' =>'BillController@store',
+ 			'as' =>'bill.store'
+	]);
+
+//finding unit price
+Route::get('/findPrice',[
+	'uses' =>'BillController@findPrice',
+	'as' =>'findPrice'
 ]);
-
-
