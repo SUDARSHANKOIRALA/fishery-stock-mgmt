@@ -8,6 +8,7 @@ use DB;
 use App\Item;
 use App\Bill;
 use App\Customer;
+use App\Discount;
 use Session;
      
 
@@ -21,7 +22,12 @@ class BillController extends Controller
      */
     public function index()
     {
-        //
+         $bill  = Bill::all();
+         $customer = Customer::all();
+         $fdiscount = Discount::all();
+         return view('Admin.sales.sales_show')->with("bills",$bill)
+                                       ->with("customers",$customer)
+                                       ->with("discounts",$fdiscount);
     }
 
     /**
@@ -33,8 +39,10 @@ class BillController extends Controller
     {
         $bill = Bill::all();
         $customer = Customer::all();
+        $fdiscount = Discount::all();
         return view('bill.bill_create')->with("bills",$bill)
-                                       ->with("customer",$customer)
+                                       ->with("customers",$customer)
+                                       ->with("discounts",$fdiscount)
                                        ->with("items",Item::where('status','=',1)->get());
     }
 
@@ -46,7 +54,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-            dd($request->all());   
+            // dd($request->all());   
          $customer = new Customer;
          $customer->customer_name = $request->input('customer_name');
          $customer->contact_no = $request->input('contact_no');
@@ -63,10 +71,19 @@ class BillController extends Controller
                                 'amount'=>$request->amount[$key]);
                 Bill::insert($data);
             }
-        }
-         
-         return redirect('/bill/create')->with('success','item added');
+            $fdiscount = new Discount;
+            $fdiscount->bill_no = $request->input('bill_no');
+            $fdiscount->final_discount = $request->input('final_discount');
+            $fdiscount->save();
 
+
+        }
+
+         $single_bill = Bill::where('customer_id',$id)->get();
+         // dd($single_bill);
+          return view('bill/bill_show')->with("single_bills",$single_bill);
+
+                                    
     }
 
     /**
@@ -77,7 +94,8 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        //
+        $detail = Bill::find($bill->bill_no);
+        dd($detail);
     }
 
     /**
@@ -118,4 +136,5 @@ class BillController extends Controller
         $data=Item::select('unit_price')->where('id',$request->id)->first();
         return $data;
     }
+    
 }

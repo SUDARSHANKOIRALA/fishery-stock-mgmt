@@ -39,8 +39,8 @@
 
 
     <!-- Scripts -->
-      <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/backend_js/bootstrap.min.js') }}"></script>  
+  <script src="{{ asset('js/app.js') }}"></script>
+   <script src="{{ asset('js/backend_js/bootstrap.min.js') }}"></script>  
     
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -69,7 +69,8 @@
             var amount = $(this).val()-0;
             total +=amount;
         });
-        $('.total').html(total+" Rs");
+        $('.total').val(total);
+        // $('.total').html(total+" Rs");
     };
 
     $('.addRow').on('click',function(){
@@ -82,8 +83,8 @@
         //adding row
       var tr='<tr>'+
                  '<td><select class="form-control item_name" name ="item_name[]""><option>All Items</option>@foreach($items as $item)<option value="{{ $item->id }}">{{ $item->item_name }}</option>@endforeach</select></td>'+
-            '<td><input type="text" name="unit_price[]" class="form-control unit_price"></td>'+
-           '<td><input type="text" name="quantity[]" class="form-control quantity"></td>'+
+            '<td><input type="text" name="unit_price[]" class="form-control unit_price" readonly></td>'+
+           '<td><input type="text" name="quantity[]" class="form-control quantity" required></td>'+
            '<td><input type="text" value="0" name="discount[]" class="form-control discount"></td>'+
            '<td><input type="text" name="amount[]" class="form-control amount"></td>'+
             '<td><a href="#" class="btn btn-danger remove">-</a></td>'
@@ -113,6 +114,17 @@
         else {
         $(this).parent().parent().remove();
     }
+     });
+
+     $('.final_discount').keyup(function(){
+        var total = $('#total').val();
+        var final_discount =$('.final_discount').val();
+
+        var net_total = (total) -(total*final_discount)/100;
+        console.log(total,final_discount,net_total);
+
+        $('#net_total').val(net_total); 
+
      });
 
     });

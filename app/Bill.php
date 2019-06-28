@@ -10,6 +10,9 @@ class Bill extends Model
         return $this->belongsTO('App\Item');
     }
     public function customer(){
-    	return $this->belongsTo('App\customer');
+    	return $this->belongsTo('App\Customer');
+    }
+     public function fdiscount(){
+    	return $this->belongsTo('App\Discount');
     }
 }

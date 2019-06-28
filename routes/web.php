@@ -68,8 +68,13 @@ Route::get('/bill/create','BillController@create');
  			'as' =>'bill.store'
 	]);
 
+ //view the bill.
+Route::get('/sales/show','BillController@index');
+
 //finding unit price
 Route::get('/findPrice',[
 	'uses' =>'BillController@findPrice',
 	'as' =>'findPrice'
 ]);
+//view all detals
+ROute::get('/details/{bill_no}','BillController@show');

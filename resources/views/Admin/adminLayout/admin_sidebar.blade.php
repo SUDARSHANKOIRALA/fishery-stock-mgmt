@@ -47,6 +47,10 @@
 					<li>
 						<a href="{{ url('/item/view') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Items</a>
 					</li>
+
+					<li>
+						<a href="{{ url('/sales/show') }}"><svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>Sales</a>
+					</li>
 		
 				</ul>
 			</li>
